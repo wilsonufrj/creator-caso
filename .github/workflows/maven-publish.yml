@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: '19'
           distribution: 'temurin'
-
+          
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
@@ -32,5 +32,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/your-repo-name:latest
-            ${{ secrets.DOCKER_HUB_USERNAME }}/your-repo-name:${{ github.ref_name }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/creator-caso:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/creator-caso:${{ github.ref_name }}
