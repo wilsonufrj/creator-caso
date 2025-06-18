@@ -28,6 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>19</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -75,6 +77,15 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>
