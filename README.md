@@ -33,7 +33,7 @@ O Caso Creator é um microsserviço Spring Boot projetado para gerenciar 'casos'
 *   Uma instância do PostgreSQL em execução.
 
 ### Configuração
-1.  Clone o repositório (substitua `<URL_DO_REPOSITORIO>` pela URL correta): `git clone <URL_DO_REPOSITORIO>`
+1.  Clone o repositório
 2.  Configure a conexão com o banco de dados no arquivo `src/main/resources/application.properties`. Atualize as seguintes propriedades conforme necessário:
     ```properties
     spring.datasource.url=jdbc:postgresql://localhost:5432/nome_do_banco
@@ -67,7 +67,7 @@ Você também pode construir e executar esta aplicação usando Docker.
 *   Docker instalado e em execução.
 
 ### Construindo a Imagem Docker
-1.  Certifique-se de que o projeto foi compilado e o arquivo JAR (`target/caso-creator-0.0.1.jar`) existe. Você pode gerar o JAR com o comando:
+1.  Certifique-se de que o projeto foi compilado e o arquivo JAR existe. Você pode gerar o JAR com o comando:
     ```bash
     ./mvnw clean package
     ```
