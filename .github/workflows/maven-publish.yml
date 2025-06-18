@@ -38,4 +38,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/creator-caso:latest
-            ${{ secrets.DOCKER_HUB_USERNAME }}/creator-caso:${{ github.ref_name }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/creator-caso:1.0.0
