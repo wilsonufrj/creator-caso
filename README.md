@@ -59,6 +59,55 @@ java -jar target/caso-creator-0.0.1.jar
 ```
 A aplicação estará disponível em `http://localhost:8080` (ou a porta configurada em `application.properties`).
 
+## Executando com Docker
+
+Você também pode construir e executar esta aplicação usando Docker.
+
+### Pré-requisitos Docker
+*   Docker instalado e em execução.
+
+### Construindo a Imagem Docker
+1.  Certifique-se de que o projeto foi compilado e o arquivo JAR (`target/caso-creator-0.0.1.jar`) existe. Você pode gerar o JAR com o comando:
+    ```bash
+    ./mvnw clean package
+    ```
+    (Ou `mvn clean package` se você não estiver usando o Maven Wrapper). O `package` é preferível ao `install` aqui, pois apenas o JAR é necessário para a imagem Docker.
+
+2.  Navegue até o diretório raiz do projeto (onde o `Dockerfile` está localizado) e construa a imagem Docker:
+    ```bash
+    docker build -t caso-creator .
+    ```
+
+### Executando o Contêiner Docker
+Após construir a imagem, você pode executar a aplicação em um contêiner Docker:
+```bash
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://<host_do_seu_banco_de_dados>:<porta_do_banco>/<nome_do_banco> \
+  -e SPRING_DATASOURCE_USERNAME=<seu_usuario_postgresql> \
+  -e SPRING_DATASOURCE_PASSWORD=<sua_senha_postgresql> \
+  --name caso-creator-app \
+  caso-creator
+```
+Substitua os placeholders:
+*   `<host_do_seu_banco_de_dados>`: O endereço do seu servidor PostgreSQL (ex: `localhost` se estiver na mesma máquina, ou o IP/hostname do servidor de banco de dados se o Docker estiver em outra máquina ou rede). Se o PostgreSQL estiver rodando em um contêiner Docker na mesma rede Docker, você pode usar o nome do serviço do contêiner PostgreSQL.
+*   `<porta_do_banco>`: A porta do seu servidor PostgreSQL (normalmente `5432`).
+*   `<nome_do_banco>`: O nome do banco de dados.
+*   `<seu_usuario_postgresql>`: Seu nome de usuário do PostgreSQL.
+*   `<sua_senha_postgresql>`: Sua senha do PostgreSQL.
+
+Por exemplo, se o banco de dados estiver rodando localmente:
+```bash
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/nome_do_banco \
+  -e SPRING_DATASOURCE_USERNAME=seu_usuario_postgresql \
+  -e SPRING_DATASOURCE_PASSWORD=sua_senha_postgresql \
+  --name caso-creator-app \
+  caso-creator
+```
+(Nota: `host.docker.internal` é uma forma de acessar a máquina host a partir de um contêiner Docker no Docker Desktop para Windows e Mac. Para Linux, você pode precisar configurar a rede de forma diferente, como usar `--network="host"` e `localhost` na URL JDBC, ou usar o IP da interface `docker0`.)
+
+A aplicação estará acessível em `http://localhost:8080`.
+
 ## Tecnologias Utilizadas
 *   Java 19
 *   Spring Boot 3.5.0

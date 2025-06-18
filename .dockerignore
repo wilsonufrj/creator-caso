@@ -1,0 +1,11 @@
+.git
+.gitignore
+.mvn/
+mvnw
+mvnw.cmd
+pom.xml
+src/
+target/
+!target/caso-creator-0.0.1.jar
+README.md
+HELP.md
